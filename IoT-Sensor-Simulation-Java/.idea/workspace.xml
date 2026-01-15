@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="01a3dc71-5f01-472a-9c64-101f3336ace8" name="변경" comment="Added AWS IoT connection">
+      <change beforePath="$PROJECT_DIR$/../IoT-Spring-Boot/target/classes/270fa4d7d83505d2cb7822d7bc394fdd6118e2d79d14830b5724dbdeef0b8a56-certificate.pem.crt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IoT-Spring-Boot/target/classes/270fa4d7d83505d2cb7822d7bc394fdd6118e2d79d14830b5724dbdeef0b8a56-private.pem.key" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IoT-Spring-Boot/target/classes/270fa4d7d83505d2cb7822d7bc394fdd6118e2d79d14830b5724dbdeef0b8a56-public.pem.key" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IoT-Spring-Boot/target/classes/AmazonRootCA1.pem" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IoT-Spring-Boot/target/classes/AmazonRootCA3.pem" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IoT-Spring-Boot/target/classes/application.properties" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Enne-dev&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Enne-dev/IoT-Sensor-Simulation-Java&quot;,
+    &quot;accountId&quot;: &quot;da3b2b2d-f036-4588-afd7-476cd8aea03f&quot;
+  }
+}</component>
+  <component name="MavenRunner">
+    <option name="vmOptions" value="-U" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="3899N2NnBGd5kyKCAEmYloR20X7" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/Desktop/iot-project/IoT-Sensor-Simulation-Java/src/main/resources&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;모듈&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.runner&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
+    &quot;애플리케이션.SensorSimulator.executor&quot;: &quot;Run&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\iot-project\IoT-Sensor-Simulation-Java\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="SensorSimulator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="SensorSimulator" />
+      <module name="IoT-Sensor-Simulation-Java" />
+      <option name="VM_PARAMETERS" value="--add-opens java.base/java.net=ALL-UNNAMED" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="애플리케이션.SensorSimulator" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.138" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.29346.138" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="01a3dc71-5f01-472a-9c64-101f3336ace8" name="변경" comment="" />
+      <created>1768200884649</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1768200884649</updated>
+      <workItem from="1768200887870" duration="8329000" />
+      <workItem from="1768211423485" duration="414000" />
+      <workItem from="1768221959296" duration="3560000" />
+      <workItem from="1768266326082" duration="1774000" />
+      <workItem from="1768268134900" duration="8784000" />
+      <workItem from="1768277520676" duration="4632000" />
+      <workItem from="1768353850011" duration="417000" />
+      <workItem from="1768442815561" duration="17000" />
+      <workItem from="1768442872175" duration="5000" />
+    </task>
+    <task id="LOCAL-00001" summary="Added AWS IoT connection">
+      <option name="closed" value="true" />
+      <created>1768280715967</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1768280715967</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added AWS IoT connection" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added AWS IoT connection" />
+  </component>
+</project>
