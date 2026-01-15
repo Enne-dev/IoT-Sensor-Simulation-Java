@@ -1,18 +1,14 @@
 package com.example.iotspringboot;
 
 import com.amazonaws.services.iot.client.AWSIotException;
-import com.amazonaws.services.iot.client.AWSIotMqttClient;
 import com.amazonaws.services.iot.client.AWSIotMessage;
+import com.amazonaws.services.iot.client.AWSIotMqttClient;
 import com.amazonaws.services.iot.client.AWSIotQos;
 import com.amazonaws.services.iot.client.AWSIotTopic;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.bouncycastle.openssl.PEMParser;
-import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
@@ -23,25 +19,30 @@ import software.amazon.awssdk.services.dynamodb.model.PutItemRequest;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.security.KeyStore;
-import java.security.Security;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
-public class IotSubscriber implements CommandLineRunner {
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.bouncycastle.openssl.PEMParser;
+import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter;
+import java.security.Security;
 
-    private static final Logger logger = LoggerFactory.getLogger(IotSubscriber.class);
+@Component
+public class IoTSubscriber implements CommandLineRunner {
+
+    private static final Logger logger = LoggerFactory.getLogger(IoTSubscriber.class);
 
     private static final String clientEndpoint = "a1u6nmfv3uv0e6-ats.iot.ap-northeast-1.amazonaws.com";
-    private static final String clientId = "MySensorSubscriber";
-    private static final String certificateFile = "C:/Users/user/Desktop/iot-project/IoT-Sensor-Simulation-Java/src/main/resources/270fa4d7d83505d2cb7822d7bc394fdd6118e2d79d14830b5724dbdeef0b8a56-certificate.pem.crt";
-    private static final String privateKeyFile = "C:/Users/user/Desktop/iot-project/IoT-Sensor-Simulation-Java/src/main/resources/270fa4d7d83505d2cb7822d7bc394fdd6118e2d79d14830b5724dbdeef0b8a56-private.pem.key";
+    private static final String clientId = "MySensorSubscriber";  // 기존 clientId와 구분
+    private static final String certificateFile = "C:/Users/user/Desktop/iot-project/IoT-Spring-Boot/src/main/resources/270fa4d7d83505d2cb7822d7bc394fdd6118e2d79d14830b5724dbdeef0b8a56-certificate.pem.crt";
+    private static final String privateKeyFile = "C:/Users/user/Desktop/iot-project/IoT-Spring-Boot/src/main/resources/270fa4d7d83505d2cb7822d7bc394fdd6118e2d79d14830b5724dbdeef0b8a56-private.pem.key";
 
-    // DynamoDB tableの名前
-    private static final String tableName = "SensorData";  // AWS DynamoDB table
+    //DynamoDB tableの名前
+    private static final String tableName = "SensorData";  // AWS DynamoDB table create
+
     private AWSIotMqttClient client;
     private final DynamoDbClient dynamoDbClient = DynamoDbClient.create();  // DynamoDB client
     private final ObjectMapper objectMapper = new ObjectMapper();  // JSON parsing
@@ -49,12 +50,14 @@ public class IotSubscriber implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         initializeClient();  // client init & connect
-        subscribeToTopic("factory/sensor/data");  // Topic Subscribing
+        subscribeToTopic("factory/sensor/data");  // 元のpublish topic subscribe ( AWS IoT core -> my thing / MQTT Test )
         logger.info("IoT Subscriber started and subscribed to topic.");
     }
 
-    //AWS IoT MQTT Client init & connect
-    //if connect failed -> retry
+    /**
+     * AWS IoT MQTT client init & connect.
+     * if connect failed -> retry
+     */
     private void initializeClient() {
         try {
             Security.addProvider(new BouncyCastleProvider());
@@ -66,8 +69,8 @@ public class IotSubscriber implements CommandLineRunner {
         } catch (Exception e) {
             logger.error("Failed to connect to AWS IoT. Retrying in 5 seconds...", e);
             try {
-                Thread.sleep(5000);  // 5초 대기 후 재시도 (무한 루프 방지 위해 실제로는 카운터 추가 추천)
-                initializeClient();  // 재귀 재시도
+                Thread.sleep(5000);  // 5s -> retry
+                initializeClient();
             } catch (InterruptedException ie) {
                 Thread.currentThread().interrupt();
                 logger.error("Retry interrupted", ie);
@@ -75,14 +78,16 @@ public class IotSubscriber implements CommandLineRunner {
         }
     }
 
-    //topic subscribe & message handler setting
-    //@param topic -> subscribing -> MQTT topic (factory/sensor/data)
+    /**
+     * topic subscribe & msg handler setting
+     * topic == MQTT topic ( "factory/sensor/data" )
+     */
     private void subscribeToTopic(String topic) {
         try {
             AWSIotTopic iotTopic = new AWSIotTopic(topic, AWSIotQos.QOS1) {
                 @Override
                 public void onMessage(AWSIotMessage message) {
-                    processMessage(message);  // 수신 메시지 처리
+                    processMessage(message);  // 受けたメッセージを処理
                 }
             };
             client.subscribe(iotTopic);
@@ -92,34 +97,42 @@ public class IotSubscriber implements CommandLineRunner {
         }
     }
 
-    //受信されたMQTT msgを処理 -> JSON parsing, 異常感知, DynamoDB Save
-    //@param message -> 受信 -> AWS IoT msg
+    /**
+     * 受けたメッセージを処理: JSON parsing, 異常感知, DynamoDB save.
+     * @param message 受けた AWS IoT メッセージ
+     */
     private void processMessage(AWSIotMessage message) {
         String payload = message.getStringPayload();
         logger.info("Received message: {}", payload);
 
         try {
-            //JSON parsing
+            // JSON parsing
             JsonNode jsonNode = objectMapper.readTree(payload);
             String timestamp = jsonNode.get("timestamp").asText();
             double temperature = jsonNode.get("temperature").asDouble();
             double humidity = jsonNode.get("humidity").asDouble();
             double vibration = jsonNode.get("vibration").asDouble();
 
-            //異常 感知 (ex : 温度が80度Cを超えたり振動が4.0を超えたら警告)
+            // 異常感知 (ex: 温度が80度Cを超えたり、振動4.0を超えたら警告）
             if (temperature > 80 || vibration > 4.0) {
                 logger.warn("Anomaly detected: High temperature ({}) or vibration ({}) at {}", temperature, vibration, timestamp);
-                // TODO: 실제 알림 (SNS, Email) 추가 가능
+                // TODO: 実際のアラム（SNS,Email）追加可能
             }
 
-            //DynamoDBに保存
+            // DynamoDBに保存
             saveToDynamoDB(timestamp, temperature, humidity, vibration);
         } catch (Exception e) {
             logger.error("Error processing message: {}", payload, e);
         }
     }
 
-    //parsingされた センサーのデーターをDynamoDBに保存
+    /**
+     * parsed sensor data -> DynamoDB Save
+     * @param timestamp タイムスタンプ
+     * @param temperature 温度
+     * @param humidity 湿度
+     * @param vibration 振動
+     */
     private void saveToDynamoDB(String timestamp, double temperature, double humidity, double vibration) {
         Map<String, AttributeValue> item = new HashMap<>();
         item.put("timestamp", AttributeValue.builder().s(timestamp).build());

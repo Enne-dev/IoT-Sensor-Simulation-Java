@@ -33,8 +33,8 @@ public class IoTSpringBootApplication {
 
     private static final String clientEndpoint = "a1u6nmfv3uv0e6-ats.iot.ap-northeast-1.amazonaws.com";
     private static final String clientId = "MySensor";
-    private static final String certificateFile = "C:/Users/user/Desktop/iot-project/IoT-Sensor-Simulation-Java/src/main/resources/270fa4d7d83505d2cb7822d7bc394fdd6118e2d79d14830b5724dbdeef0b8a56-certificate.pem.crt";
-    private static final String privateKeyFile = "C:/Users/user/Desktop/iot-project/IoT-Sensor-Simulation-Java/src/main/resources/270fa4d7d83505d2cb7822d7bc394fdd6118e2d79d14830b5724dbdeef0b8a56-private.pem.key";
+    private static final String certificateFile = "C:/Users/user/Desktop/iot-project/IoT-Spring-Boot/src/main/resources/270fa4d7d83505d2cb7822d7bc394fdd6118e2d79d14830b5724dbdeef0b8a56-certificate.pem.crt";
+    private static final String privateKeyFile = "C:/Users/user/Desktop/iot-project/IoT-Spring-Boot/src/main/resources/270fa4d7d83505d2cb7822d7bc394fdd6118e2d79d14830b5724dbdeef0b8a56-private.pem.key";
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(IoTSpringBootApplication.class, args);
